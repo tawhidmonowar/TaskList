@@ -11,4 +11,5 @@ interface TaskRepository {
     suspend fun addToFavorite(id: Long)
     suspend fun removeFromFavorite(id: Long)
     suspend fun deleteTask(id: Long)
+    suspend fun update(task: TaskModel)
 }

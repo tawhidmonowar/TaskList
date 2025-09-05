@@ -67,7 +67,6 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.coroutines.extensions)
 
-
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
     implementation ("androidx.room:room-ktx:2.6.1")
@@ -78,5 +77,7 @@ dependencies {
     annotationProcessor(libs.androidx.room.compiler)
 
     kapt("androidx.room:room-compiler:$room_version")
+
+    implementation(libs.retrofit.gson.convertor)
 
 }

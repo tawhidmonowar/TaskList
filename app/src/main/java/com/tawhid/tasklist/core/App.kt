@@ -20,7 +20,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            TaskListTheme {
+            TaskListTheme (
+                false
+            ){
                 val rootNavController = rememberNavController()
                 NavHost(
                     navController = rootNavController,
