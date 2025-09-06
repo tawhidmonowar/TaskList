@@ -55,47 +55,13 @@ class AddTaskViewModel(
         }
     }
 
-    fun onDateSelected(dateMillis: Long?) {
-        viewModelScope.launch {
-            _state.update { currentState ->
-                currentState.copy(selectedDateMillis = dateMillis, showDatePickerDialog = false)
-            }
-        }
-    }
-
-    fun onTimeSelected(hour: Int, minute: Int) {
-        viewModelScope.launch {
-            _state.update { currentState ->
-                currentState.copy(
-                    selectedHour = hour,
-                    selectedMinute = minute,
-                    showTimePickerDialog = false
-                )
-            }
-        }
-    }
-
-    fun showDatePicker() {
-        viewModelScope.launch {
-            _state.update { it.copy(showDatePickerDialog = true) }
-        }
-    }
-
-    fun dismissDatePicker() {
-        viewModelScope.launch {
-            _state.update { it.copy(showDatePickerDialog = false) }
-        }
-    }
-
-    fun showTimePicker() {
-        viewModelScope.launch {
-            _state.update { it.copy(showTimePickerDialog = true) }
-        }
-    }
-
-    fun dismissTimePicker() {
-        viewModelScope.launch {
-            _state.update { it.copy(showTimePickerDialog = false) }
+    fun onSchedule(triggerTime: Long) {
+        println("triggerTime: $triggerTime")
+        _state.update {
+            it.copy(
+                reminderTime = triggerTime,
+                isReminderSet = true
+            )
         }
     }
 
@@ -109,14 +75,14 @@ class AddTaskViewModel(
                         description = state.value.description,
                         isReminderSet = state.value.isReminderSet,
                         isFavorite = state.value.isFavorite,
-                        reminderTime = state.value.selectedDateMillis,
+                        reminderTime = state.value.reminderTime,
                         createdAt = System.currentTimeMillis()
                     )
                 )
 
-                println("Selected Date: ${state.value.selectedDateMillis} \n " +
-                        "Selected Hour: ${state.value.selectedHour} \n " +
-                        "Selected Minute: ${state.value.selectedMinute}")
+                println(
+                    "Selected Time in DB: ${state.value.reminderTime} \n "
+                )
 
                 _state.update {
                     it.copy(
@@ -124,9 +90,7 @@ class AddTaskViewModel(
                         description = "",
                         isReminderSet = false,
                         isFavorite = false,
-                        selectedDateMillis = null,
-                        selectedHour = 0,
-                        selectedMinute = 0,
+                        reminderTime = null,
                         toastMessage = "Task added successfully!"
                     )
                 }

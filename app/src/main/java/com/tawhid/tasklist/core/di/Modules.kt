@@ -11,6 +11,7 @@ import com.tawhid.tasklist.domain.usecase.GetAllTaskUseCase
 import com.tawhid.tasklist.domain.usecase.GetFavoriteTaskUseCase
 import com.tawhid.tasklist.domain.usecase.GetTaskByIDUseCase
 import com.tawhid.tasklist.domain.usecase.RemoveFromFavoriteUseCase
+import com.tawhid.tasklist.domain.usecase.UpdateReminderUseCase
 import com.tawhid.tasklist.presentation.screen.add_task.AddTaskViewModel
 import com.tawhid.tasklist.presentation.screen.detail.DetailViewModel
 import com.tawhid.tasklist.presentation.screen.home.HomeViewModel
@@ -39,6 +40,7 @@ val AndroidKoinModules = module {
     factory { AddToFavoriteUseCase(get()) }
     factory { RemoveFromFavoriteUseCase(get()) }
     factory { DeleteTaskUseCase(get()) }
+    factory { UpdateReminderUseCase(get()) }
 
     viewModel { HomeViewModel(get(), get(), get()) }
     viewModel { AddTaskViewModel(get()) }

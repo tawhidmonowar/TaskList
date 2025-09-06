@@ -67,16 +67,15 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.coroutines.extensions)
 
-
+    // Koin
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
-    implementation ("androidx.room:room-ktx:2.6.1")
 
-    val room_version = "2.6.1"
-
+    // Room
+    implementation (libs.androidx.room.ktx)
     implementation(libs.androidx.room.runtime)
     annotationProcessor(libs.androidx.room.compiler)
 
-    kapt("androidx.room:room-compiler:$room_version")
-
+    //Gson
+    implementation(libs.retrofit.gson.convertor)
 }

@@ -11,16 +11,19 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberDatePickerState
-import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.tawhid.tasklist.presentation.screen.add_task.components.DateTimePicker
+import com.tawhid.tasklist.core.scheduler.setUpAlarmWithNotification
+import com.tawhid.tasklist.domain.model.TaskModel
+import com.tawhid.tasklist.presentation.screen.add_task.components.DateTimePickerSheet
 import com.tawhid.tasklist.presentation.screen.add_task.components.ReminderSwitch
 import com.tawhid.tasklist.presentation.screen.add_task.components.TitleDescriptionField
 import com.tawhid.tasklist.presentation.screen.components.CustomAppBar
@@ -34,15 +37,8 @@ fun AddTaskScreen(
 ) {
 
     val state by addTaskViewModel.state.collectAsStateWithLifecycle()
+    var showBottomSheet by remember { mutableStateOf(true) }
     val context = LocalContext.current
-    val datePickerState = rememberDatePickerState(
-        initialSelectedDateMillis = state.selectedDateMillis ?: System.currentTimeMillis()
-    )
-
-    val timePickerState = rememberTimePickerState(
-        initialHour = state.selectedHour,
-        initialMinute = state.selectedMinute
-    )
 
     LaunchedEffect(state.toastMessage) {
         state.toastMessage?.let { message ->
@@ -95,40 +91,37 @@ fun AddTaskScreen(
             AnimatedVisibility(
                 visible = state.isReminderSet
             ) {
-                DateTimePicker(
-                    formattedDate = state.formattedDate,
-                    formattedTime = state.formattedTime,
-                    onShowTimePickerDialog = {
-                        addTaskViewModel.showTimePicker()
-                    },
-                    onShowDatePickerDialog = {
-                        addTaskViewModel.showDatePicker()
-                    },
-                    showDatePickerDialog = state.showDatePickerDialog,
-                    showTimePickerDialog = state.showTimePickerDialog,
-                    onDismissDatePicker = {
-                        addTaskViewModel.dismissDatePicker()
-                    },
-                    onDateSelected = {
-                        addTaskViewModel.onDateSelected(it)
-                    },
-                    datePickerState = datePickerState,
-                    dismissTimePicker = {
-                        addTaskViewModel.dismissTimePicker()
-                    },
-                    onTimeSelected = { hour, minute ->
-                        addTaskViewModel.onTimeSelected(hour, minute)
-                    },
-                    timePickerState = timePickerState
-                )
+                if (showBottomSheet) {
+                    DateTimePickerSheet(
+                        onSchedule = { triggerTime ->
+                            addTaskViewModel.onSchedule(triggerTime)
+                            showBottomSheet = false
+                        },
+                        onDismiss = {
+                            showBottomSheet = false
+                        }
+                    )
+                }
             }
-
 
             Spacer(modifier = Modifier.height(5.dp))
 
             Button(
                 onClick = {
                     addTaskViewModel.onAddTask()
+                    setUpAlarmWithNotification(
+                        context,
+                        task = TaskModel(
+                            id = System.currentTimeMillis(),
+                            title = state.title,
+                            description = state.description,
+                            isReminderSet = state.isReminderSet,
+                            isFavorite = state.isFavorite,
+                            reminderTime = state.reminderTime,
+                            createdAt = System.currentTimeMillis()
+                        ),
+                        reminderTimeMillis = state.reminderTime ?: 0
+                    )
                 }
             ) {
                 Text("Add Task")
