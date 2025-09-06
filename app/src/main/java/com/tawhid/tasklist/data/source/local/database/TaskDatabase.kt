@@ -8,6 +8,6 @@ abstract class TaskDatabase : RoomDatabase() {
     abstract fun taskDao(): TaskDao
 
     companion object {
-        const val NAME = "Task_DB"
+        const val NAME = "TaskDB"
     }
 }

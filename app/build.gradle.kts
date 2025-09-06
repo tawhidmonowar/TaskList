@@ -72,13 +72,10 @@ dependencies {
     implementation(libs.koin.androidx.compose)
 
     // Room
-    implementation(libs.androidx.room.ktx)
+    implementation (libs.androidx.room.ktx)
     implementation(libs.androidx.room.runtime)
     annotationProcessor(libs.androidx.room.compiler)
 
     //Gson
     implementation(libs.retrofit.gson.convertor)
-
-    //Splash Screen
-   // implementation(libs.androidx.core.splashscreen)
 }
