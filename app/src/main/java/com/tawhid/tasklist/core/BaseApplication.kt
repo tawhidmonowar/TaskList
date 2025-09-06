@@ -16,11 +16,8 @@ class BaseApplication : Application() {
         initKoin {
             androidContext(this@BaseApplication)
         }
-
-        val notificationChannel =
-            NotificationChannel(CHANNEL, NAME, NotificationManager.IMPORTANCE_DEFAULT)
-        val notificationManager =
-            this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationChannel = NotificationChannel(CHANNEL, NAME, NotificationManager.IMPORTANCE_DEFAULT)
+        val notificationManager = this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(notificationChannel)
     }
 }

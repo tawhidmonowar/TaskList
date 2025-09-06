@@ -34,7 +34,8 @@ class MainActivity : ComponentActivity() {
             ) {
                 requestPermissions(
                     arrayOf(
-                        Manifest.permission.POST_NOTIFICATIONS
+                        Manifest.permission.POST_NOTIFICATIONS,
+                        Manifest.permission.SCHEDULE_EXACT_ALARM
                     ),
                     1001
                 )
