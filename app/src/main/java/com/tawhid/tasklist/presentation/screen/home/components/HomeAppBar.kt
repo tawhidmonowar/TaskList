@@ -29,7 +29,7 @@ fun HomeAppBar() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 45.dp)
+            .padding(top = 35.dp)
             .padding(horizontal = 16.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically

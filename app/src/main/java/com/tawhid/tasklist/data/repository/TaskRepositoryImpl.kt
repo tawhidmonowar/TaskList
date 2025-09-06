@@ -82,18 +82,4 @@ class TaskRepositoryImpl(
     override suspend fun deleteTask(id: Long) {
         taskDao.deleteTodo(id)
     }
-
-    override suspend fun update(task: TaskModel) {
-        taskDao.upsertTask(
-            TaskEntity(
-                id = task.id,
-                title = task.title,
-                description = task.description,
-                isReminderSet = task.isReminderSet,
-                isFavorite = task.isFavorite,
-                reminderTime = task.reminderTime,
-                createdAt = task.createdAt
-            )
-        )
-    }
 }

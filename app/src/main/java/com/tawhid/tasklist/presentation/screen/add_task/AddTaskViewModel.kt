@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tawhid.tasklist.domain.model.TaskModel
 import com.tawhid.tasklist.domain.usecase.AddTaskUseCase
-import com.tawhid.tasklist.domain.usecase.ReminderUpdateUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.onStart
@@ -13,8 +12,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class AddTaskViewModel(
-    private val addTaskUseCase: AddTaskUseCase,
-    private val reminderUpdateUseCase: ReminderUpdateUseCase,
+    private val addTaskUseCase: AddTaskUseCase
 ) : ViewModel() {
     private val _state = MutableStateFlow(AddTaskState())
     var state = _state.onStart {
@@ -143,12 +141,6 @@ class AddTaskViewModel(
     fun onToastMessageShown() {
         _state.update {
             it.copy(toastMessage = null)
-        }
-    }
-
-    fun updateReminder(taskModel: TaskModel) {
-        viewModelScope.launch {
-            reminderUpdateUseCase(taskModel)
         }
     }
 }
