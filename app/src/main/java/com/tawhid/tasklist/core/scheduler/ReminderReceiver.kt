@@ -6,11 +6,11 @@ import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.google.gson.Gson
 import com.tawhid.tasklist.R
 import com.tawhid.tasklist.domain.model.TaskModel
-import com.tawhid.tasklist.presentation.MainActivity
 
 class ReminderReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
@@ -37,7 +37,7 @@ class ReminderReceiver : BroadcastReceiver() {
     private fun showNotification(context: Context, task: TaskModel) {
         val resultIntent = Intent(
             context,
-            MainActivity::class.java
+            com.tawhid.tasklist.core.MainActivity::class.java
         ).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }

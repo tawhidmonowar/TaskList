@@ -1,4 +1,4 @@
-package com.tawhid.tasklist.presentation
+package com.tawhid.tasklist.core
 
 import android.Manifest
 import android.content.pm.PackageManager

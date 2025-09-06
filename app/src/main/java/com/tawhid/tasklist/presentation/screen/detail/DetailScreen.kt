@@ -19,8 +19,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavHostController
-import com.tawhid.tasklist.presentation.navigation.LocalNavController
 import com.tawhid.tasklist.presentation.screen.components.CustomAppBar
 import com.tawhid.tasklist.presentation.theme.backgroundColorsPreset
 import org.koin.androidx.compose.koinViewModel
@@ -28,16 +26,13 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun DetailScreen(
     detailViewModel: DetailViewModel = koinViewModel(),
+    onBackClick: () -> Unit
 ) {
     val state by detailViewModel.state.collectAsStateWithLifecycle()
-    val rootNavController = LocalNavController.current
-
     Scaffold(
         topBar = {
             CustomAppBar(
-                onBackClick = {
-                    rootNavController.navigateUp()
-                },
+                onBackClick = onBackClick,
                 onFavoriteClick = {
                     detailViewModel.onFavoriteClick()
                 },

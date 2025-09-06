@@ -1,4 +1,4 @@
-package com.tawhid.tasklist.data.source.local.database
+package com.tawhid.tasklist.data.local.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
