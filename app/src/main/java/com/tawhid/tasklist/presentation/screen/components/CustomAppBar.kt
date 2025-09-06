@@ -1,12 +1,12 @@
 package com.tawhid.tasklist.presentation.screen.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -40,16 +40,9 @@ fun CustomAppBar(
             )
         },
         navigationIcon = {
-            IconButton(
-                onClick = {
-                    onBackClick()
-                }, modifier = Modifier
-                    .padding(5.dp)
-                    .background(
-                        color = MaterialTheme.colorScheme.background,
-                        shape = MaterialTheme.shapes.large
-                    )
-            ) {
+            IconButton(onClick = {
+                onBackClick()
+            }) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
                     contentDescription = "Back"
@@ -57,16 +50,9 @@ fun CustomAppBar(
             }
         },
         actions = {
-            IconButton(
-                onClick = {
-                    onFavoriteClick()
-                }, modifier = Modifier
-                    .padding(5.dp)
-                    .background(
-                        color = MaterialTheme.colorScheme.background,
-                        shape = MaterialTheme.shapes.large
-                    )
-            ) {
+            IconButton(onClick = {
+                onFavoriteClick()
+            }) {
                 Icon(
                     imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                     contentDescription = "Favorite"

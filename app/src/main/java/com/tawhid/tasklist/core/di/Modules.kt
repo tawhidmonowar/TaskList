@@ -19,7 +19,7 @@ import org.koin.android.ext.koin.androidApplication
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
-val AppModule = module {
+val AndroidKoinModules = module {
     single {
         Room.databaseBuilder(
             androidApplication(),
@@ -32,15 +32,7 @@ val AppModule = module {
         get<TaskDatabase>().taskDao()
     }
     single<TaskRepository> { TaskRepositoryImpl(get()) }
-}
 
-val ViewModelModule = module {
-    viewModel { HomeViewModel(get(), get(), get()) }
-    viewModel { AddTaskViewModel(get()) }
-    viewModel { DetailViewModel(get(), get(), get(), get()) }
-}
-
-val UseCaseModule = module {
     factory { GetAllTaskUseCase(get()) }
     factory { GetFavoriteTaskUseCase(get()) }
     factory { AddTaskUseCase(get()) }
@@ -49,4 +41,8 @@ val UseCaseModule = module {
     factory { RemoveFromFavoriteUseCase(get()) }
     factory { DeleteTaskUseCase(get()) }
     factory { UpdateReminderUseCase(get()) }
+
+    viewModel { HomeViewModel(get(), get(), get()) }
+    viewModel { AddTaskViewModel(get()) }
+    viewModel { DetailViewModel(get(), get(), get(), get()) }
 }

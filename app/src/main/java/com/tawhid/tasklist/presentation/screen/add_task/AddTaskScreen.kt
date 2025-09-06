@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -58,8 +57,7 @@ fun AddTaskScreen(
                 title = "Add a new Task",
                 isFavorite = state.isFavorite
             )
-        },
-        containerColor = MaterialTheme.colorScheme.surface
+        }
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -111,23 +109,20 @@ fun AddTaskScreen(
             Button(
                 onClick = {
                     addTaskViewModel.onAddTask()
-                    state.reminderTime?.let {
-                        setUpAlarmWithNotification(
-                            context,
-                            task = TaskModel(
-                                id = System.currentTimeMillis(),
-                                title = state.title,
-                                description = state.description,
-                                isReminderSet = state.isReminderSet,
-                                isFavorite = state.isFavorite,
-                                reminderTime = state.reminderTime,
-                                createdAt = System.currentTimeMillis()
-                            ),
-                            reminderTimeMillis = it
-                        )
-                    }
-                },
-                shape = MaterialTheme.shapes.medium,
+                    setUpAlarmWithNotification(
+                        context,
+                        task = TaskModel(
+                            id = System.currentTimeMillis(),
+                            title = state.title,
+                            description = state.description,
+                            isReminderSet = state.isReminderSet,
+                            isFavorite = state.isFavorite,
+                            reminderTime = state.reminderTime,
+                            createdAt = System.currentTimeMillis()
+                        ),
+                        reminderTimeMillis = state.reminderTime ?: 0
+                    )
+                }
             ) {
                 Text("Add Task")
             }
