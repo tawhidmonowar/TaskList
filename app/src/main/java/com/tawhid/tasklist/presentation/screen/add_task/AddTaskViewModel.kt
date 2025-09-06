@@ -111,7 +111,7 @@ class AddTaskViewModel(
                         description = state.value.description,
                         isReminderSet = state.value.isReminderSet,
                         isFavorite = state.value.isFavorite,
-                        reminderTime = state.value.selectedDateMillis,
+                        reminderTime = state.value.reminderTime,
                         createdAt = System.currentTimeMillis()
                     )
                 )
