@@ -22,8 +22,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavHostController
 import com.tawhid.tasklist.core.scheduler.setUpAlarmWithNotification
 import com.tawhid.tasklist.domain.model.TaskModel
+import com.tawhid.tasklist.presentation.navigation.LocalNavController
 import com.tawhid.tasklist.presentation.screen.add_task.components.DateTimePickerSheet
 import com.tawhid.tasklist.presentation.screen.add_task.components.ReminderSwitch
 import com.tawhid.tasklist.presentation.screen.add_task.components.TitleDescriptionField
@@ -34,12 +36,12 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun AddTaskScreen(
     addTaskViewModel: AddTaskViewModel = koinViewModel(),
-    onBackClick: () -> Unit
 ) {
 
     val state by addTaskViewModel.state.collectAsStateWithLifecycle()
     var showBottomSheet by remember { mutableStateOf(true) }
     val context = LocalContext.current
+    val rootNavController = LocalNavController.current
 
     LaunchedEffect(state.toastMessage) {
         state.toastMessage?.let { message ->
@@ -51,7 +53,9 @@ fun AddTaskScreen(
     Scaffold(
         topBar = {
             CustomAppBar(
-                onBackClick = onBackClick,
+                onBackClick = {
+                    rootNavController.navigateUp()
+                },
                 onFavoriteClick = {
                     addTaskViewModel.onFavoriteChange()
                 },

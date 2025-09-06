@@ -1,8 +1,8 @@
 package com.tawhid.tasklist.core.di
 
 import androidx.room.Room
-import com.tawhid.tasklist.data.local.database.TaskDatabase
 import com.tawhid.tasklist.data.repository.TaskRepositoryImpl
+import com.tawhid.tasklist.data.source.local.database.TaskDatabase
 import com.tawhid.tasklist.domain.repository.TaskRepository
 import com.tawhid.tasklist.domain.usecase.AddTaskUseCase
 import com.tawhid.tasklist.domain.usecase.AddToFavoriteUseCase

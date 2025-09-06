@@ -1,7 +1,7 @@
 package com.tawhid.tasklist.data.repository
 
-import com.tawhid.tasklist.data.local.database.TaskDao
-import com.tawhid.tasklist.data.local.database.TaskEntity
+import com.tawhid.tasklist.data.source.local.database.TaskDao
+import com.tawhid.tasklist.data.source.local.database.TaskEntity
 import com.tawhid.tasklist.domain.model.TaskModel
 import com.tawhid.tasklist.domain.repository.TaskRepository
 import kotlinx.coroutines.flow.Flow

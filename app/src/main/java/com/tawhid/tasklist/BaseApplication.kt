@@ -1,9 +1,8 @@
-package com.tawhid.tasklist.core
+package com.tawhid.tasklist
 
 import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.content.Context
 import com.tawhid.tasklist.core.di.initKoin
 import org.koin.android.ext.koin.androidContext
 
@@ -17,7 +16,7 @@ class BaseApplication : Application() {
             androidContext(this@BaseApplication)
         }
         val notificationChannel = NotificationChannel(CHANNEL, NAME, NotificationManager.IMPORTANCE_DEFAULT)
-        val notificationManager = this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager = this.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(notificationChannel)
     }
 }
